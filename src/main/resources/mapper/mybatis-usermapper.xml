@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mybooks.batch.user.mapper.UserMapper">
+    <select id="getUserIdWhoWasBornThisMonth" resultType="java.lang.Long">
+        <![CDATA[
+        SELECT user_id
+        FROM user
+        WHERE user_birth_month_day LIKE CONCAT(#{month}, '-%')
+          AND user_status_id = '활성'
+        ORDER BY user_id ASC
+            LIMIT #{_skiprows}, #{_pagesize}
+        ]]>
+    </select>
+
+    <select id="getUserStatusChangeTarget" resultType="java.lang.Long">
+        <![CDATA[
+        SELECT user_id
+        FROM user
+        WHERE user_status_id = #{userStatus}
+          AND user_latest_login_at < DATE_SUB(NOW(), INTERVAL 90 DAY)
+        ORDER BY user_id asc;
+        ]]>
+    </select>
+
+    <update id="updateUserStatus">
+        UPDATE user
+        SET user_status_id = #{status}
+        WHERE user_id = #{id}
+    </update>
+</mapper>

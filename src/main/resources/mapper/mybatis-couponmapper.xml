@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mybooks.batch.coupon.mapper.CouponMapper">
+    <insert id="createBirthDayCoupon" parameterType="com.mybooks.batch.coupon.model.Coupon" useGeneratedKeys="true"
+            keyProperty="id" keyColumn="coupon_id">
+        INSERT INTO coupon(coupon_name, coupon_order_min, coupon_max_discount_cost, coupon_discount_cost,
+                           coupon_start_date, coupon_end_date, is_rate, is_target_order, coupon_created_date)
+        VALUES (#{name}, #{orderMin}, #{maxDiscountCost}, #{discountRate}, #{startDate}, #{endDate}, #{isRate},
+                #{isTargetOrder}, #{createdDate})
+    </insert>
+</mapper>
