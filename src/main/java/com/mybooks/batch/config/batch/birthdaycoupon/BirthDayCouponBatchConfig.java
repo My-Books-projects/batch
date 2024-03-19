@@ -52,9 +52,6 @@ import org.springframework.scheduling.annotation.Scheduled;
 public class BirthDayCouponBatchConfig {
     private final JobBuilderFactory jobBuilderFactory;
     private final StepBuilderFactory stepBuilderFactory;
-    /**
-     * The Sql session factory.
-     */
     public final SqlSessionFactory sqlSessionFactory;
     private final JobLauncher jobLauncher;
     private final CouponMapper couponMapper;
