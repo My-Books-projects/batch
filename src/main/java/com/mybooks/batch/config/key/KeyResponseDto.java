@@ -19,12 +19,18 @@ public class KeyResponseDto {
     private Header header;
     private Body body;
 
+    /**
+     * The type Body.
+     */
     @Getter
     @NoArgsConstructor
     public static class Body {
         private String secret;
     }
 
+    /**
+     * The type Header.
+     */
     @Getter
     @NoArgsConstructor
     public static class Header {

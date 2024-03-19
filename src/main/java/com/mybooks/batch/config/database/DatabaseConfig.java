@@ -1,15 +1,11 @@
 package com.mybooks.batch.config.database;
 
 import com.mybooks.batch.config.key.KeyConfig;
-import java.time.Duration;
-import java.util.Properties;
 import javax.sql.DataSource;
 import org.apache.commons.dbcp2.BasicDataSource;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.transaction.PlatformTransactionManager;
 
 /**
  * packageName    : com.mybooks.batch.config.database
@@ -33,6 +29,13 @@ public class DatabaseConfig {
         this.databaseProperties = databaseProperties;
     }
 
+    /**
+     * methodName : dataSource <br>
+     * author : damho-lee <br>
+     * description : DataSource 설정 파일.<br>
+     *
+     * @return DataSource
+     */
     @Bean
     public DataSource dataSource() {
         BasicDataSource dataSource = new BasicDataSource();

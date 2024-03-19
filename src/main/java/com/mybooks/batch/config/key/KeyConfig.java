@@ -44,11 +44,24 @@ public class KeyConfig {
 
     private final KeyProperties keyProperties;
 
+    /**
+     * Instantiates a new Key config.
+     *
+     * @param keyProperties the key properties
+     */
     @Autowired
     public KeyConfig(KeyProperties keyProperties) {
         this.keyProperties = keyProperties;
     }
 
+    /**
+     * methodName : keyStore <br>
+     * author : damho-lee <br>
+     * description : 키매니저 설정.<br>
+     *
+     * @param keyId String
+     * @return string
+     */
     public String keyStore(String keyId) {
         try {
             KeyStore clientStore = KeyStore.getInstance("PKCS12");
