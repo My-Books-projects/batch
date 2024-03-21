@@ -63,7 +63,7 @@ public class UserStatusChangeBatchConfig {
      * @throws JobRestartException                 작업을 다시 시작하려는 시도를 나타내는 예외
      */
 //    @Scheduled(cron = "0 0 0 * * *")
-    @Scheduled(cron = "0 45 9 21 3 *")
+    @Scheduled(cron = "0 55 9 21 3 *", zone = "Asia/Seoul")
     public void runJob() throws JobInstanceAlreadyCompleteException, JobExecutionAlreadyRunningException,
             JobParametersInvalidException, JobRestartException {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd:HH:mm:ss");

@@ -70,7 +70,7 @@ public class BirthDayCouponBatchConfig {
      * @throws JobRestartException                 작업을 다시 시작하려는 불법적인 시도를 나타내는 예외
      */
 //    @Scheduled(cron = "0 30 23 L * *")
-    @Scheduled(cron = "0 45 9 21 3 *")
+    @Scheduled(cron = "0 55 9 21 3 *", zone = "Asia/Seoul")
     public void runJob() throws JobInstanceAlreadyCompleteException, JobExecutionAlreadyRunningException,
             JobParametersInvalidException, JobRestartException {
 
