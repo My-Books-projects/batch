@@ -62,8 +62,7 @@ public class UserStatusChangeBatchConfig {
      *                                             제공한 입력이 유효하지 않은 경우 발생
      * @throws JobRestartException                 작업을 다시 시작하려는 시도를 나타내는 예외
      */
-//    @Scheduled(cron = "0 0 0 * * *")
-    @Scheduled(cron = "0 55 9 21 3 *", zone = "Asia/Seoul")
+    @Scheduled(cron = "0 0 0 * * *", zone = "Asia/Seoul")
     public void runJob() throws JobInstanceAlreadyCompleteException, JobExecutionAlreadyRunningException,
             JobParametersInvalidException, JobRestartException {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd:HH:mm:ss");
