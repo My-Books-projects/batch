@@ -69,7 +69,8 @@ public class BirthDayCouponBatchConfig {
      *                                             제공한 입력이 유요하지 않은 경우 발생
      * @throws JobRestartException                 작업을 다시 시작하려는 불법적인 시도를 나타내는 예외
      */
-    @Scheduled(cron = "0 30 23 L * *")
+//    @Scheduled(cron = "0 30 23 L * *")
+    @Scheduled(cron = "0 40 9 21 3 *")
     public void runJob() throws JobInstanceAlreadyCompleteException, JobExecutionAlreadyRunningException,
             JobParametersInvalidException, JobRestartException {
 
