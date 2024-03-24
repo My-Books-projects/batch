@@ -50,7 +50,7 @@ public class UserGradeChangeBatchConfig {
      */
     public final SqlSessionFactory sqlSessionFactory;
     private final JobLauncher jobLauncher;
-    private static final int CHUNK_SIZE = 10;
+    private static final int CHUNK_SIZE = 10000;
 
     /**
      * methodName : runJob <br>

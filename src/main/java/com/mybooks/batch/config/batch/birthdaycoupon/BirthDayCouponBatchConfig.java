@@ -55,7 +55,7 @@ public class BirthDayCouponBatchConfig {
     public final SqlSessionFactory sqlSessionFactory;
     private final JobLauncher jobLauncher;
     private final CouponMapper couponMapper;
-    private static final int CHUNK_SIZE = 10;
+    private static final int CHUNK_SIZE = 10000;
 
     /**
      * methodName : runJob <br>
