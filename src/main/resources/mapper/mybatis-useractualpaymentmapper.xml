@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mybooks.batch.useractualpayment.mapper.UserActualPaymentMapper">
+    <select id="getUserActualPayment" resultType="com.mybooks.batch.useractualpayment.model.UserActualPayment">
+        <![CDATA[
+        SELECT bo.user_id,
+               (@actual_payment :=
+                   SUM(COALESCE(total_order_cost, 0))
+                   - SUM(COALESCE(total_wrap_cost, 0))
+                   - SUM(COALESCE(total_delivery_cost, 0))) AS actual_payment,
+               (SELECT user_grade_id
+                FROM user_grade
+                WHERE is_available = true
+                  AND user_grade_min <= @actual_payment
+                  AND user_grade_max > @actual_payment)     AS grade
+        FROM book_order AS bo
+                 LEFT JOIN (SELECT order_id,
+                                   SUM(order_total_cost) AS total_order_cost
+                            FROM book_order
+                            WHERE book_order.order_date >= DATE_SUB(CURRENT_DATE, INTERVAL 3 MONTH)
+                            GROUP BY order_id) AS order_totals ON bo.order_id = order_totals.order_id
+                 LEFT JOIN (SELECT od2.order_id,
+                                   order_detail_id,
+                                   SUM(w.wrap_cost) AS total_wrap_cost
+                            FROM wrap AS w
+                                     LEFT JOIN order_detail AS od2 ON w.wrap_id = od2.wrap_id
+                            WHERE od2.order_detail_created_date >= DATE_SUB(CURRENT_DATE, INTERVAL 3 MONTH)
+                            GROUP BY order_detail_id) AS wrap_cost_totals
+                           ON order_totals.order_id = wrap_cost_totals.order_id
+                 LEFT JOIN (SELECT order_id,
+                                   SUM(dr.delivery_cost) AS total_delivery_cost
+                            FROM book_order AS bo2
+                                     LEFT JOIN delivery_rule AS dr ON bo2.delivery_rule_id = dr.delivery_rule_id
+                            WHERE bo2.order_date >= DATE_SUB(CURRENT_DATE, INTERVAL 3 MONTH)
+                            GROUP BY order_id) AS delivery_cost_totals ON bo.order_id = delivery_cost_totals.order_id
+        GROUP BY bo.user_id
+        ORDER BY user_id;
+        ]]>
+    </select>
+
+    <update id="updateUserGrade" parameterType="com.mybooks.batch.useractualpayment.model.UserGrade">
+        UPDATE user
+        SET user_grade_id           = #{userGradeId},
+            user_grade_changed_date = CURRENT_DATE
+        WHERE user_id = #{userId}
+    </update>
+</mapper>
