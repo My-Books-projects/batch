@@ -52,7 +52,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 public class BirthDayCouponBatchConfig {
     private final JobBuilderFactory jobBuilderFactory;
     private final StepBuilderFactory stepBuilderFactory;
-    public final SqlSessionFactory sqlSessionFactory;
+    private final SqlSessionFactory sqlSessionFactory;
     private final JobLauncher jobLauncher;
     private final CouponMapper couponMapper;
     private static final int CHUNK_SIZE = 10000;

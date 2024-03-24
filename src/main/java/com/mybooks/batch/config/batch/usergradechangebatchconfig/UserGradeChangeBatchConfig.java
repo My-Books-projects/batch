@@ -45,10 +45,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 public class UserGradeChangeBatchConfig {
     private final JobBuilderFactory jobBuilderFactory;
     private final StepBuilderFactory stepBuilderFactory;
-    /**
-     * The Sql session factory.
-     */
-    public final SqlSessionFactory sqlSessionFactory;
+    private final SqlSessionFactory sqlSessionFactory;
     private final JobLauncher jobLauncher;
     private static final int CHUNK_SIZE = 10000;
 
